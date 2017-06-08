@@ -15,6 +15,7 @@ import (
 const (
 	APPID     = "2f871f8481e49b4c"
 	APPSECRET = "CQFItxl9hPXuQuVcQa5F2iPmZSbN0hYS"
+	MAX_LEN   = 255
 )
 
 func init() {
@@ -29,13 +30,25 @@ func main() {
 		AppID:     APPID,
 		AppSecret: APPSECRET,
 	}
-	r, err := c.Query(strings.Join(os.Args[1:], " "))
+	q := strings.TrimSpace(strings.Join(os.Args[1:], " "))
+	items := alfred.NewResult()
 
+	if len(q) > 255 {
+		items.Append(&alfred.ResultElement{
+			Valid:    false,
+			Title:    "错误: 最大查询字符数为255",
+			Subtitle: q,
+		})
+		b := new(bytes.Buffer)
+		json.NewEncoder(b).Encode(items)
+		fmt.Print(b.String())
+		os.Exit(1)
+	}
+
+	r, err := c.Query(q)
 	if err != nil {
 		panic(err)
 	}
-
-	items := alfred.NewResult()
 
 	if r.Basic != nil {
 		item := alfred.ResultElement{

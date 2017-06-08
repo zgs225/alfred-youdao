@@ -30,6 +30,7 @@ func main() {
 		AppID:     APPID,
 		AppSecret: APPSECRET,
 	}
+	agent := newAgent(c)
 	q := strings.TrimSpace(strings.Join(os.Args[1:], " "))
 	items := alfred.NewResult()
 
@@ -45,7 +46,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	r, err := c.Query(q)
+	r, err := agent.Query(q)
 	if err != nil {
 		panic(err)
 	}
@@ -87,4 +88,8 @@ func main() {
 	b := new(bytes.Buffer)
 	json.NewEncoder(b).Encode(items)
 	fmt.Print(b.String())
+
+	if agent.Dirty {
+		agent.Cache.SaveFile(CACHE_FILE)
+	}
 }

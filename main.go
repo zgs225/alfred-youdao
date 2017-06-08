@@ -29,7 +29,11 @@ func main() {
 		AppID:     APPID,
 		AppSecret: APPSECRET,
 	}
-	r, _ := c.Query(strings.Join(os.Args[1:], " "))
+	r, err := c.Query(strings.Join(os.Args[1:], " "))
+
+	if err != nil {
+		panic(err)
+	}
 
 	items := alfred.NewResult()
 

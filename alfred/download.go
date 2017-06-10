@@ -10,7 +10,7 @@ import (
 )
 
 func Download(file, url string) error {
-	log.Println("[i] Downloading", url)
+	log.Printf("[i] Downloading %v to %v", url, file)
 
 	res, err := http.Get(url)
 	if err != nil {

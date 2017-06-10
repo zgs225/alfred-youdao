@@ -78,7 +78,10 @@ type GithubRelease struct {
 func (p *GithubProvider) Latest() (*updateEntity, error) {
 	api_url := fmt.Sprintf("https://api.github.com/repos/%s/%s/releases/latest", p.Owner, p.Repo)
 	log.Printf("[i] Checking version from %s", api_url)
-	resp, err := http.Get(api_url)
+	client := &http.Client{
+		Timeout: time.Minute,
+	}
+	resp, err := client.Get(api_url)
 	if err != nil {
 		return nil, err
 	}

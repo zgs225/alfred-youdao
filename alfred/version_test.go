@@ -44,3 +44,49 @@ func TestParseVersion(t *testing.T) {
 		}
 	}
 }
+
+func TestAfter(t *testing.T) {
+	v1 := &Version{1, 2, 3}
+	v2 := &Version{0, 3, 10}
+	if !v1.After(v2) {
+		t.Error("Version after error 1")
+	}
+
+	v2 = &Version{1, 1, 19}
+	if !v1.After(v2) {
+		t.Error("Version after error 2")
+	}
+
+	v2 = &Version{1, 2, 2}
+	if !v1.After(v2) {
+		t.Error("Version after error 3")
+	}
+
+	v2 = &Version{1, 2, 4}
+	if v1.After(v2) {
+		t.Error("Version after error 4")
+	}
+}
+
+func TestBefore(t *testing.T) {
+	v1 := &Version{1, 2, 3}
+	v2 := &Version{0, 3, 10}
+	if v1.Before(v2) {
+		t.Error("Version after error 1")
+	}
+
+	v2 = &Version{1, 1, 19}
+	if v1.Before(v2) {
+		t.Error("Version after error 2")
+	}
+
+	v2 = &Version{1, 2, 2}
+	if v1.Before(v2) {
+		t.Error("Version after error 3")
+	}
+
+	v2 = &Version{1, 2, 4}
+	if !v1.Before(v2) {
+		t.Error("Version after error 4")
+	}
+}

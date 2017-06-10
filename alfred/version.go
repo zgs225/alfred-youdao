@@ -21,6 +21,18 @@ func (v Version) String() string {
 	return fmt.Sprintf("%d.%d.%d", v.Major, v.Minor, v.Patch)
 }
 
+func (v *Version) After(v2 *Version) bool {
+	return v.Major > v2.Major || (v.Major == v2.Major && v.Minor > v2.Minor) || (v.Major == v2.Major && v.Minor == v2.Minor && v.Patch > v2.Patch)
+}
+
+func (v *Version) Equals(v2 *Version) bool {
+	return v.Major == v2.Major && v.Minor == v2.Minor && v.Patch == v2.Patch
+}
+
+func (v *Version) Before(v2 *Version) bool {
+	return v.Major < v2.Major || (v.Major == v2.Major && v.Minor < v2.Minor) || (v.Major == v2.Major && v.Minor == v2.Minor && v.Patch < v2.Patch)
+}
+
 // ParseVersion parsing string like 1.3.0, v1.3.0 to Version instance
 func ParseVersion(s string) (*Version, error) {
 	if len(s) == 0 {

@@ -2,6 +2,7 @@ package alfred
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -14,6 +15,10 @@ type Version struct {
 	Major int
 	Minor int
 	Patch int
+}
+
+func (v Version) String() string {
+	return fmt.Sprintf("%d.%d.%d", v.Major, v.Minor, v.Patch)
 }
 
 // ParseVersion parsing string like 1.3.0, v1.3.0 to Version instance

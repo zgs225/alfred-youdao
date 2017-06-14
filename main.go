@@ -19,18 +19,18 @@ const (
 )
 
 func init() {
-	log.SetPrefix("[I] ")
+	log.SetPrefix("[i] ")
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 }
 
 func main() {
 	log.Println(os.Args)
 
-	c := &youdao.Client{
+	client := &youdao.Client{
 		AppID:     APPID,
 		AppSecret: APPSECRET,
 	}
-	agent := newAgent(c)
+	agent := newAgent(client)
 	q := strings.TrimSpace(strings.Join(os.Args[1:], " "))
 	items := alfred.NewResult()
 

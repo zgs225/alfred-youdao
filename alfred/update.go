@@ -46,7 +46,7 @@ func (u *Updater) Update() error {
 		cmd := exec.Command("open", file)
 		cmd.Stderr = os.Stderr
 		cmd.Stdout = os.Stdout
-		return cmd.Start()
+		return cmd.Run()
 	}
 	return errors.New("Can't update")
 }

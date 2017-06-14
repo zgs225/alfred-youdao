@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	CACHE_EXPIRES time.Duration = time.Hour * 24
+	CACHE_EXPIRES time.Duration = 30 * 24 * time.Hour
 	CACHE_FILE    string        = "cache.dat"
 )
 

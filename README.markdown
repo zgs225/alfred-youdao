@@ -3,7 +3,12 @@ Alfred-Youdao
 
 Youdao Dict for Alfred
 
-### CHANGELOG
+## CHANGELOG
+
+### 1.2.2
+
++ 添加按Enter键复制功能
++ 可以在Workflows里面设置快捷键实现屏幕取词功能
 
 ### 1.2.1
 

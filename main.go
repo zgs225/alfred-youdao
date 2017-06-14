@@ -56,6 +56,7 @@ func main() {
 			Valid:    true,
 			Title:    r.Basic.Explains[0],
 			Subtitle: r.Basic.Phonetic,
+			Arg:      r.Basic.Explains[0],
 		}
 		items.Append(&item)
 	}
@@ -65,6 +66,7 @@ func main() {
 			Valid:    true,
 			Title:    (*r.Translation)[0],
 			Subtitle: "翻译结果",
+			Arg:      (*r.Translation)[0],
 		}
 		items.Append(&item)
 	}
@@ -81,6 +83,7 @@ func main() {
 				Valid:    true,
 				Title:    elem.Key,
 				Subtitle: elem.Value[0],
+				Arg:      elem.Key,
 			})
 		}
 	}

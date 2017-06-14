@@ -16,7 +16,7 @@ func TestCanUpdate(t *testing.T) {
 		t.Error("test error")
 	}
 
-	u.V = &Version{1, 2, 0}
+	u.V = &Version{10, 2, 0}
 	if u.CanUpdate() {
 		t.Error("version should not can update")
 	}

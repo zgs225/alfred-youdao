@@ -5,6 +5,10 @@ Youdao Dict for Alfred
 
 ## CHANGELOG
 
+### 1.2.3
+
++ 添加按`Shift+Enter`键在有道网站打开功能
+
 ### 1.2.2
 
 + 添加按Enter键复制功能

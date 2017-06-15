@@ -57,6 +57,13 @@ func main() {
 			Title:    r.Basic.Explains[0],
 			Subtitle: r.Basic.Phonetic,
 			Arg:      r.Basic.Explains[0],
+			Mods: map[string]*alfred.ModElement{
+				alfred.Mods_Shift: &alfred.ModElement{
+					Valid:    true,
+					Arg:      toYoudaoDictUrl(q),
+					Subtitle: "回车键打开词典网页",
+				},
+			},
 		}
 		items.Append(&item)
 	}
@@ -67,6 +74,13 @@ func main() {
 			Title:    (*r.Translation)[0],
 			Subtitle: "翻译结果",
 			Arg:      (*r.Translation)[0],
+			Mods: map[string]*alfred.ModElement{
+				alfred.Mods_Shift: &alfred.ModElement{
+					Valid:    true,
+					Arg:      toYoudaoDictUrl(q),
+					Subtitle: "回车键打开词典网页",
+				},
+			},
 		}
 		items.Append(&item)
 	}
@@ -84,6 +98,13 @@ func main() {
 				Title:    elem.Key,
 				Subtitle: elem.Value[0],
 				Arg:      elem.Key,
+				Mods: map[string]*alfred.ModElement{
+					alfred.Mods_Shift: &alfred.ModElement{
+						Valid:    true,
+						Arg:      toYoudaoDictUrl(q),
+						Subtitle: "回车键打开词典网页",
+					},
+				},
 			})
 		}
 	}

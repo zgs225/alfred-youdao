@@ -1,5 +1,13 @@
 package alfred
 
+const (
+	Mods_Shift = "shift"
+	Mods_Ctrl  = "ctrl"
+	Mods_Cmd   = "cmd"
+	Mods_Atl   = "atl"
+	Mods_Fn    = "fn"
+)
+
 type IconElement struct {
 	Type string `json:"type,omitempty"`
 	Path string `json:"path,omitempty"`
@@ -9,7 +17,7 @@ type ModElement struct {
 	Valid     bool              `json:"valid,omitempty"`
 	Arg       string            `json:"arg,omitempty"`
 	Subtitle  string            `json:"subtitle,omitempty"`
-	Variables map[string]string `json:"variables;omitempty"`
+	Variables map[string]string `json:"variables,omitempty"`
 }
 
 type TextElement struct {

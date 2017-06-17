@@ -5,6 +5,10 @@ Youdao Dict for Alfred
 
 ## CHANGELOG
 
+### 1.2.4
+
++ 修改Alfred执行队列行为，让查询更平滑
+
 ### 1.2.3
 
 + 添加按`Shift+Enter`键在有道网站打开功能

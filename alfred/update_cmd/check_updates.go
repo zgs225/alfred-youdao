@@ -50,6 +50,7 @@ func check_updates_cmd(args []string) {
 }
 
 func check_updates(owner, repo string, version *alfred.Version) {
+	log.Printf("Checking updates for %s/%s...\n", owner, repo)
 	g := &alfred.GithubProvider{owner, repo}
 	u := &alfred.Updater{
 		V: version,

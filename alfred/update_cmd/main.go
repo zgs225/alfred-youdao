@@ -36,6 +36,4 @@ func main() {
 	default:
 		usage()
 	}
-
-	fmt.Println("vim-go")
 }

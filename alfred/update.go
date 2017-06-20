@@ -23,26 +23,26 @@ type UpdateProvider interface {
 type Updater struct {
 	V *Version
 	P UpdateProvider
-	e *updateEntity
+	E *updateEntity
 }
 
 func (u *Updater) CanUpdate() bool {
-	if u.e == nil {
+	if u.E == nil {
 		v, err := u.P.Latest()
 		if err != nil {
 			log.Println(err)
 			return false
 		}
-		u.e = v
+		u.E = v
 	}
 
-	return u.e.V.After(u.V)
+	return u.E.V.After(u.V)
 }
 
 func (u *Updater) Update() error {
 	if u.CanUpdate() {
 		file := u.filename()
-		Download(file, u.e.Url.String())
+		Download(file, u.E.Url.String())
 		cmd := exec.Command("open", file)
 		cmd.Stderr = os.Stderr
 		cmd.Stdout = os.Stdout
@@ -52,10 +52,10 @@ func (u *Updater) Update() error {
 }
 
 func (u *Updater) filename() string {
-	if u.e == nil {
+	if u.E == nil {
 		return ""
 	}
 	tmpdir := os.TempDir()
-	base := path.Base(u.e.Url.Path)
+	base := path.Base(u.E.Url.Path)
 	return path.Join(tmpdir, base)
 }

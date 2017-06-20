@@ -3,6 +3,16 @@ Alfred-Youdao
 
 Youdao Dict for Alfred
 
+## Features
+
++ 使用`Shift+Enter`在有道词典网页中打开
++ 按`Enter`键复制翻译结果
+
+## TODO
+
++ [ ] 一个好的自动更新机制(正在进行中...)
++ [ ] 拼写提示功能
+
 ## CHANGELOG
 
 ### 1.2.4
@@ -34,8 +44,3 @@ Youdao Dict for Alfred
 #### 1.0.0
 
 + 完成查询和翻译功能
-
-## TODO
-
-+ [] 一个好的自动更新机制(正在进行中...)
-+ [] 拼写提示功能

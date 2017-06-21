@@ -62,8 +62,9 @@ func check_updates(owner, repo string, version *alfred.Version) {
 	b := new(bytes.Buffer)
 
 	if u.CanUpdate() {
-		text := fmt.Sprintf("可以升级到: %v", u.E.V)
-		notify(text, repo, "", "default")
+		// Do not display notification
+		// text := fmt.Sprintf("可以升级到: %v", u.E.V)
+		// notify(text, repo, "", "default")
 		finfo.Updates = true
 		finfo.Version = u.E.V.String()
 	}

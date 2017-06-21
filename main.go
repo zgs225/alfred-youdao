@@ -25,6 +25,7 @@ func init() {
 
 func main() {
 	log.Println(os.Args)
+	checkUpdate()
 
 	client := &youdao.Client{
 		AppID:     APPID,

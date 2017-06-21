@@ -24,6 +24,7 @@ func updates() {
 		log.Println("更新失败: ", err)
 		os.Exit(1)
 	} else {
+		os.Remove(".alfred_updates")
 		notify(u.E.Name, *repo, "已更新到"+u.E.V.String(), "default")
 		log.Println("更新成功")
 	}

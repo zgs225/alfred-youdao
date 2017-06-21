@@ -1,9 +1,6 @@
 package main
 
 import (
-	"bytes"
-	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -16,6 +13,8 @@ const (
 	APPID     = "2f871f8481e49b4c"
 	APPSECRET = "CQFItxl9hPXuQuVcQa5F2iPmZSbN0hYS"
 	MAX_LEN   = 255
+
+	UPDATECMD = "alfred-youdao:update"
 )
 
 func init() {
@@ -35,16 +34,23 @@ func main() {
 	q := strings.TrimSpace(strings.Join(os.Args[1:], " "))
 	items := alfred.NewResult()
 
+	if q == UPDATECMD {
+		doUpdate()
+		items.Append(&alfred.ResultElement{
+			Valid:    true,
+			Title:    "正在更新中...",
+			Subtitle: "有道词典 for Alfred",
+		})
+		items.End()
+	}
+
 	if len(q) > 255 {
 		items.Append(&alfred.ResultElement{
 			Valid:    false,
 			Title:    "错误: 最大查询字符数为255",
 			Subtitle: q,
 		})
-		b := new(bytes.Buffer)
-		json.NewEncoder(b).Encode(items)
-		fmt.Print(b.String())
-		os.Exit(1)
+		items.End()
 	}
 
 	r, err := agent.Query(q)
@@ -90,7 +96,7 @@ func main() {
 		items.Append(&alfred.ResultElement{
 			Valid:    true,
 			Title:    "网络释义",
-			Subtitle: "有道词典",
+			Subtitle: "有道词典 for Alfred",
 		})
 
 		for _, elem := range *r.Web {
@@ -110,9 +116,16 @@ func main() {
 		}
 	}
 
-	b := new(bytes.Buffer)
-	json.NewEncoder(b).Encode(items)
-	fmt.Print(b.String())
+	if canUpdates() {
+		items.Append(&alfred.ResultElement{
+			Valid:        true,
+			Title:        "有新的更新可以更新",
+			Subtitle:     "有道词典 for Alfred",
+			Autocomplete: UPDATECMD,
+		})
+	}
+
+	items.End()
 
 	if agent.Dirty {
 		agent.Cache.SaveFile(CACHE_FILE)

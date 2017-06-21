@@ -1,5 +1,12 @@
 package alfred
 
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
 const (
 	Mods_Shift = "shift"
 	Mods_Ctrl  = "ctrl"
@@ -57,4 +64,13 @@ func (r *Result) Append(items ...*ResultElement) {
 
 func (r *Result) Count() int {
 	return len(*r.Items)
+}
+
+func (r *Result) End() {
+	b := new(bytes.Buffer)
+	if err := json.NewEncoder(b).Encode(r); err != nil {
+		panic(err)
+	}
+	fmt.Print(b.String())
+	os.Exit(0)
 }

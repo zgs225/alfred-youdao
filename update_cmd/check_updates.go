@@ -16,6 +16,23 @@ type updateInfo struct {
 	Time    int64  `json:"time"`
 }
 
+func (info *updateInfo) Dumps() error {
+	b := new(bytes.Buffer)
+	if err := json.NewEncoder(b).Encode(info); err != nil {
+		return err
+	}
+	f, err := os.Create(".alfred_updates")
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	_, err = f.Write(b.Bytes())
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func check_updates_cmd() {
 	version, err := alfred.ParseVersion(*vers)
 	if err != nil {
@@ -36,8 +53,6 @@ func check_updates(owner, repo string, version *alfred.Version) {
 	finfo := updateInfo{
 		Time: time.Now().Unix(),
 	}
-	b := new(bytes.Buffer)
-
 	if u.CanUpdate() {
 		// Do not display notification
 		// text := fmt.Sprintf("可以升级到: %v", u.E.V)
@@ -45,16 +60,7 @@ func check_updates(owner, repo string, version *alfred.Version) {
 		finfo.Updates = true
 		finfo.Version = u.E.V.String()
 	}
-	if err := json.NewEncoder(b).Encode(&finfo); err != nil {
-		panic(err)
-	}
-	f, err := os.Create(".alfred_updates")
-	if err != nil {
-		panic(err)
-	}
-	defer f.Close()
-	_, err = f.Write(b.Bytes())
-	if err != nil {
+	if err := finfo.Dumps(); err != nil {
 		panic(err)
 	}
 }

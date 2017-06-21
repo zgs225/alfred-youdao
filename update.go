@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/zgs225/alfred-youdao/alfred"
 	"log"
 	"os"
 	"os/exec"
@@ -9,7 +10,7 @@ import (
 )
 
 const (
-	VERSION = "1.2.0"
+	VERSION = "1.3.0"
 	OWNER   = "zgs225"
 	REPO    = "alfred-youdao"
 	F_INFO  = ".alfred_updates"
@@ -28,6 +29,19 @@ func (i *updateInfo) CheckAvailable() bool {
 	return t.Before(today)
 }
 
+func canUpdates() bool {
+	info, _ := loadUpdateInfo()
+	if info == nil {
+		return false
+	}
+	currentv, _ := alfred.ParseVersion(VERSION)
+	version, err := alfred.ParseVersion(info.Version)
+	if err != nil {
+		return false
+	}
+	return info.Updates && version.After(currentv)
+}
+
 func checkUpdate() {
 	if checkAvailable() {
 		cmd := exec.Command("./update_cmd", "check", "--owner", OWNER, "--repo", REPO, "--version", VERSION)
@@ -35,6 +49,14 @@ func checkUpdate() {
 		if err != nil {
 			log.Println("Check update error: ", err)
 		}
+	}
+}
+
+func doUpdate() {
+	cmd := exec.Command("./update_cmd", "update", "--owner", OWNER, "--repo", REPO, "--version", VERSION)
+	err := cmd.Start()
+	if err != nil {
+		log.Println("Check update error: ", err)
 	}
 }
 

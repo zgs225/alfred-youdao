@@ -3,8 +3,6 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	"flag"
-	"fmt"
 	"log"
 	"os"
 	"time"
@@ -18,28 +16,7 @@ type updateInfo struct {
 	Time    int64  `json:"time"`
 }
 
-func check_updates_cmd(args []string) {
-	f := flag.NewFlagSet("check_update", flag.PanicOnError)
-	owner := f.String("owner", "", "Github repo owner")
-	repo := f.String("repo", "", "Github repo")
-	vers := f.String("version", "", "Current version of the workflow")
-	f.Parse(args)
-
-	if *owner == "" {
-		f.PrintDefaults()
-		os.Exit(1)
-	}
-
-	if *repo == "" {
-		f.PrintDefaults()
-		os.Exit(1)
-	}
-
-	if *vers == "" {
-		f.PrintDefaults()
-		os.Exit(1)
-	}
-
+func check_updates_cmd() {
 	version, err := alfred.ParseVersion(*vers)
 	if err != nil {
 		log.Println("版本解析错误: ", err)

@@ -42,7 +42,10 @@ func (u *Updater) CanUpdate() bool {
 func (u *Updater) Update() error {
 	if u.CanUpdate() {
 		file := u.filename()
-		Download(file, u.E.Url.String())
+		if err := Download(file, u.E.Url.String()); err != nil {
+			return err
+		}
+		// defer os.Remove(file)
 		cmd := exec.Command("open", file)
 		cmd.Stderr = os.Stderr
 		cmd.Stdout = os.Stdout

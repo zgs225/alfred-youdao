@@ -20,9 +20,11 @@ func updates() {
 	}
 
 	if err := u.Update(); err != nil {
+		notify("更新失败", *repo, "", "default")
 		log.Println("更新失败: ", err)
 		os.Exit(1)
 	} else {
+		notify(u.E.Name, *repo, "已更新到"+u.E.V.String(), "default")
 		log.Println("更新成功")
 	}
 }

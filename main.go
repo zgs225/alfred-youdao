@@ -125,9 +125,11 @@ func main() {
 		})
 	}
 
-	items.End()
-
 	if agent.Dirty {
-		agent.Cache.SaveFile(CACHE_FILE)
+		if err := agent.Cache.SaveFile(CACHE_FILE); err != nil {
+			log.Println(err)
+		}
 	}
+
+	items.End()
 }

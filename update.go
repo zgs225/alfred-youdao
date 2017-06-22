@@ -16,6 +16,14 @@ const (
 	F_INFO  = ".alfred_updates"
 )
 
+var (
+	_info *updateInfo
+)
+
+func init() {
+	_info, _ = loadUpdateInfo()
+}
+
 type updateInfo struct {
 	Updates bool   `json:"updates"`
 	Version string `json:"version"`
@@ -30,16 +38,15 @@ func (i *updateInfo) CheckAvailable() bool {
 }
 
 func canUpdates() bool {
-	info, _ := loadUpdateInfo()
-	if info == nil {
+	if _info == nil {
 		return false
 	}
 	currentv, _ := alfred.ParseVersion(VERSION)
-	version, err := alfred.ParseVersion(info.Version)
+	version, err := alfred.ParseVersion(_info.Version)
 	if err != nil {
 		return false
 	}
-	return info.Updates && version.After(currentv)
+	return _info.Updates && version.After(currentv)
 }
 
 func checkUpdate() {
@@ -62,11 +69,10 @@ func doUpdate() {
 
 // 每天检查一次更新
 func checkAvailable() bool {
-	info, _ := loadUpdateInfo()
-	if info == nil {
+	if _info == nil {
 		return true
 	} else {
-		return info.CheckAvailable()
+		return _info.CheckAvailable()
 	}
 }
 

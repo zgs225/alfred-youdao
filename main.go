@@ -24,7 +24,6 @@ func init() {
 
 func main() {
 	log.Println(os.Args)
-	checkUpdate()
 
 	client := &youdao.Client{
 		AppID:     APPID,
@@ -33,16 +32,6 @@ func main() {
 	agent := newAgent(client)
 	q := strings.TrimSpace(strings.Join(os.Args[1:], " "))
 	items := alfred.NewResult()
-
-	if q == UPDATECMD {
-		doUpdate()
-		items.Append(&alfred.ResultElement{
-			Valid:    true,
-			Title:    "正在更新中...",
-			Subtitle: "有道词典 for Alfred",
-		})
-		items.End()
-	}
 
 	if len(q) > 255 {
 		items.Append(&alfred.ResultElement{
@@ -114,15 +103,6 @@ func main() {
 				},
 			})
 		}
-	}
-
-	if canUpdates() {
-		items.Append(&alfred.ResultElement{
-			Valid:        true,
-			Title:        "有新的更新可以更新",
-			Subtitle:     "有道词典 for Alfred",
-			Autocomplete: UPDATECMD,
-		})
 	}
 
 	if agent.Dirty {

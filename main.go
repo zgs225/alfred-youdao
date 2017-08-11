@@ -48,20 +48,24 @@ func main() {
 	}
 
 	if r.Basic != nil {
-		item := alfred.ResultElement{
-			Valid:    true,
-			Title:    r.Basic.Explains[0],
-			Subtitle: r.Basic.Phonetic,
-			Arg:      r.Basic.Explains[0],
-			Mods: map[string]*alfred.ModElement{
-				alfred.Mods_Shift: &alfred.ModElement{
-					Valid:    true,
-					Arg:      toYoudaoDictUrl(q),
-					Subtitle: "回车键打开词典网页",
-				},
+		phonetic := joinPhonetic(r.Basic.Phonetic, r.Basic.UkPhonetic, r.Basic.UsPhonetic)
+		mod := map[string]*alfred.ModElement{
+			alfred.Mods_Shift: &alfred.ModElement{
+				Valid:    true,
+				Arg:      toYoudaoDictUrl(q),
+				Subtitle: "回车键打开词典网页",
 			},
 		}
-		items.Append(&item)
+		for _, title := range r.Basic.Explains {
+			item := alfred.ResultElement{
+				Valid:    true,
+				Title:    title,
+				Subtitle: phonetic,
+				Arg:      title,
+				Mods:     mod,
+			}
+			items.Append(&item)
+		}
 	}
 
 	if r.Translation != nil {

@@ -20,3 +20,16 @@ func TestToYoudaoDictUrl(t *testing.T) {
 		}
 	}
 }
+
+func TestParseArgs(t *testing.T) {
+	args := []string{"./alfred-youdao", "zh-CHS=>ja", "你好"}
+	q, from, to, lang := parseArgs(args)
+	t.Log(q, from, to, lang)
+	if lang {
+		if q != "你好" || from != "zh-CHS" || to != "ja" {
+			t.Error("parseArgs error: value got false")
+		}
+	} else {
+		t.Error("parseArgs error: lang got false")
+	}
+}

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -30,8 +31,36 @@ func main() {
 		AppSecret: APPSECRET,
 	}
 	agent := newAgent(client)
-	q := strings.TrimSpace(strings.Join(os.Args[1:], " "))
+	q, from, to, lang := parseArgs(os.Args)
 	items := alfred.NewResult()
+
+	if lang {
+		if err := agent.Client.SetFrom(from); err != nil {
+			items.Append(&alfred.ResultElement{
+				Valid:    true,
+				Title:    fmt.Sprintf("错误: 源语言不支持[%s]", from),
+				Subtitle: `有道词典`,
+			})
+			items.End()
+		}
+		if err := agent.Client.SetTo(to); err != nil {
+			items.Append(&alfred.ResultElement{
+				Valid:    true,
+				Title:    fmt.Sprintf("错误: 目标语言不支持[%s]", from),
+				Subtitle: `有道词典`,
+			})
+			items.End()
+		}
+	}
+
+	if len(q) == 0 {
+		items.Append(&alfred.ResultElement{
+			Valid:    true,
+			Title:    "有道词典",
+			Subtitle: `查看"..."的解释或翻译`,
+		})
+		items.End()
+	}
 
 	if len(q) > 255 {
 		items.Append(&alfred.ResultElement{

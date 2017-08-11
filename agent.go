@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/gob"
+	"fmt"
 	"log"
 	"time"
 
@@ -21,7 +22,8 @@ type agentClient struct {
 }
 
 func (a *agentClient) Query(q string) (*youdao.Result, error) {
-	v, ok := a.Cache.Get(q)
+	k := fmt.Sprintf("from:%s,to:%s,q:%s", a.Client.GetFrom(), a.Client.GetTo(), q)
+	v, ok := a.Cache.Get(k)
 	if ok {
 		log.Println("Cache hit")
 		return v.(*youdao.Result), nil
@@ -31,7 +33,7 @@ func (a *agentClient) Query(q string) (*youdao.Result, error) {
 	if err != nil {
 		return nil, err
 	}
-	a.Cache.Set(q, r, CACHE_EXPIRES)
+	a.Cache.Set(k, r, CACHE_EXPIRES)
 	a.Dirty = true
 	return r, nil
 }

@@ -46,7 +46,7 @@ func main() {
 		if err := agent.Client.SetTo(to); err != nil {
 			items.Append(&alfred.ResultElement{
 				Valid:    true,
-				Title:    fmt.Sprintf("错误: 目标语言不支持[%s]", from),
+				Title:    fmt.Sprintf("错误: 目标语言不支持[%s]", to),
 				Subtitle: `有道词典`,
 			})
 			items.End()

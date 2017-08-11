@@ -47,15 +47,15 @@ func main() {
 		panic(err)
 	}
 
+	mod := map[string]*alfred.ModElement{
+		alfred.Mods_Shift: &alfred.ModElement{
+			Valid:    true,
+			Arg:      toYoudaoDictUrl(q),
+			Subtitle: "回车键打开词典网页",
+		},
+	}
 	if r.Basic != nil {
 		phonetic := joinPhonetic(r.Basic.Phonetic, r.Basic.UkPhonetic, r.Basic.UsPhonetic)
-		mod := map[string]*alfred.ModElement{
-			alfred.Mods_Shift: &alfred.ModElement{
-				Valid:    true,
-				Arg:      toYoudaoDictUrl(q),
-				Subtitle: "回车键打开词典网页",
-			},
-		}
 		for _, title := range r.Basic.Explains {
 			item := alfred.ResultElement{
 				Valid:    true,
@@ -69,18 +69,13 @@ func main() {
 	}
 
 	if r.Translation != nil {
+		title := strings.Join(*r.Translation, "; ")
 		item := alfred.ResultElement{
 			Valid:    true,
-			Title:    (*r.Translation)[0],
+			Title:    title,
 			Subtitle: "翻译结果",
-			Arg:      (*r.Translation)[0],
-			Mods: map[string]*alfred.ModElement{
-				alfred.Mods_Shift: &alfred.ModElement{
-					Valid:    true,
-					Arg:      toYoudaoDictUrl(q),
-					Subtitle: "回车键打开词典网页",
-				},
-			},
+			Arg:      title,
+			Mods:     mod,
 		}
 		items.Append(&item)
 	}
@@ -96,15 +91,9 @@ func main() {
 			items.Append(&alfred.ResultElement{
 				Valid:    true,
 				Title:    elem.Key,
-				Subtitle: elem.Value[0],
+				Subtitle: strings.Join(elem.Value, "; "),
 				Arg:      elem.Key,
-				Mods: map[string]*alfred.ModElement{
-					alfred.Mods_Shift: &alfred.ModElement{
-						Valid:    true,
-						Arg:      toYoudaoDictUrl(q),
-						Subtitle: "回车键打开词典网页",
-					},
-				},
+				Mods:     mod,
 			})
 		}
 	}

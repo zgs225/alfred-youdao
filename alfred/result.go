@@ -11,7 +11,7 @@ const (
 	Mods_Shift = "shift"
 	Mods_Ctrl  = "ctrl"
 	Mods_Cmd   = "cmd"
-	Mods_Atl   = "atl"
+	Mods_Alt   = "alt"
 	Mods_Fn    = "fn"
 )
 

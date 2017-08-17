@@ -8,6 +8,7 @@ Youdao Dict for Alfred
 ## Features
 
 + 使用方法 `yd {query}`
++ 支持屏幕取词功能, 需要先在Alfred Workflow中设置热键
 + 使用`Shift+Enter`在有道词典网页中打开
 + 按`Enter`键复制翻译结果
 + 支持设置源语言和目标语言，支持中文、日语、英语等相互翻译。语法是`yd zh-CHS=>ja 我爱你`

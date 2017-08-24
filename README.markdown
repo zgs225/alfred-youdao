@@ -25,6 +25,10 @@ Youdao Dict for Alfred
 + `es`     - 西班牙文
 + `auto`   - 自动
 
+## Dependencies
+
++ Go 1.8
+
 ## TODO
 
 + [x] 一个好的自动更新机制

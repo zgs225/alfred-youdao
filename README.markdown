@@ -2,7 +2,6 @@ Alfred-Youdao
 ===
 
 Youdao Dict for Alfred.    
-因为有道词典修改了API，现在的查询结果只显示翻译结果，我会尽快修改。
 
 ![预览](./assets/demo.gif)
 

@@ -32,6 +32,7 @@ Youdao Dict for Alfred.
 ## TODO
 
 + [x] 一个好的自动更新机制
++ [ ] 添加语音
 + [ ] 自定义有道API Key和Secret
 + [ ] 拼写提示功能
 

@@ -16,7 +16,7 @@ Youdao Dict for Alfred.
 
 支持相互翻译的语言列表如下:
 
-+ `zh-CHS` - 中文
++ `zh` - 中文
 + `ja`     - 日文
 + `en`     - 英文
 + `ko`     - 韩文

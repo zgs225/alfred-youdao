@@ -7,14 +7,14 @@ import (
 func TestToYoudaoDictUrl(t *testing.T) {
 	{
 		v := toYoudaoDictUrl("hello world")
-		if v != "http://dict.youdao.com/w/hello%20world/#keyfrom=dict2.top" {
+		if v != "http://dict.youdao.com/search?q=hello+world&keyfrom=fanyi.smartResult" {
 			t.Error("toYoudaoDictUrl error 1")
 		}
 	}
 
 	{
 		v := toYoudaoDictUrl("hello world!")
-		if v != "http://dict.youdao.com/w/hello%20world%21/#keyfrom=dict2.top" {
+		if v != "http://dict.youdao.com/search?q=hello+world%21&keyfrom=fanyi.smartResult" {
 			t.Log(v)
 			t.Error("toYoudaoDictUrl error 2")
 		}

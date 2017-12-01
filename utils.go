@@ -9,12 +9,8 @@ import (
 )
 
 func toYoudaoDictUrl(q string) string {
-	v := fmt.Sprintf("http://dict.youdao.com/w/%s/#keyfrom=dict2.top", q)
-	u, err := url.Parse(v)
-	if err != nil {
-		panic(err)
-	}
-	return u.String()
+	v := fmt.Sprintf("http://dict.youdao.com/search?q=%s&keyfrom=%s", url.QueryEscape(q), url.QueryEscape("fanyi.smartResult"))
+	return v
 }
 
 func joinPhonetic(phonetic, uk, us string) string {

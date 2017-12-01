@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/zgs225/alfred-youdao/alfred"
+	"github.com/zgs225/youdao"
 )
 
 func toYoudaoDictUrl(q string) string {
@@ -70,4 +71,36 @@ func copyModElementMap(m map[string]*alfred.ModElement) map[string]*alfred.ModEl
 		m2[k] = v
 	}
 	return m2
+}
+
+func wordsToSayCmdOption(q string, r *youdao.Result) string {
+	ls := strings.Split(r.L, "2")
+	if len(ls) >= 2 {
+		l := languageToSayLanguage(ls[1])
+		return fmt.Sprintf("-l %s %s", l, q)
+	}
+	return q
+}
+
+func languageToSayLanguage(l string) string {
+	switch l {
+	case "zh-CHS":
+		return "zh_CN"
+	case "ja":
+		return "ja_JP"
+	case "EN":
+		return "en_US"
+	case "ko":
+		return "ko_KR"
+	case "fr":
+		return "fr_FR"
+	case "ru":
+		return "ru_RU"
+	case "pt":
+		return "pt_PT"
+	case "es":
+		return "es_ES"
+	default:
+		return l
+	}
 }

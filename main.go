@@ -89,7 +89,7 @@ func main() {
 			mod2 := copyModElementMap(mod)
 			mod2[alfred.Mods_Cmd] = &alfred.ModElement{
 				Valid:    true,
-				Arg:      title,
+				Arg:      wordsToSayCmdOption(title, r),
 				Subtitle: "发音",
 			}
 			item := alfred.ResultElement{
@@ -108,7 +108,7 @@ func main() {
 		mod2 := copyModElementMap(mod)
 		mod2[alfred.Mods_Cmd] = &alfred.ModElement{
 			Valid:    true,
-			Arg:      title,
+			Arg:      wordsToSayCmdOption(title, r),
 			Subtitle: "发音",
 		}
 		item := alfred.ResultElement{
@@ -132,7 +132,7 @@ func main() {
 			mod2 := copyModElementMap(mod)
 			mod2[alfred.Mods_Cmd] = &alfred.ModElement{
 				Valid:    true,
-				Arg:      elem.Key,
+				Arg:      wordsToSayCmdOption(elem.Key, r),
 				Subtitle: "发音",
 			}
 			items.Append(&alfred.ResultElement{

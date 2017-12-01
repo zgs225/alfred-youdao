@@ -86,12 +86,18 @@ func main() {
 	if r.Basic != nil {
 		phonetic := joinPhonetic(r.Basic.Phonetic, r.Basic.UkPhonetic, r.Basic.UsPhonetic)
 		for _, title := range r.Basic.Explains {
+			mod2 := copyModElementMap(mod)
+			mod2[alfred.Mods_Cmd] = &alfred.ModElement{
+				Valid:    true,
+				Arg:      title,
+				Subtitle: "发音",
+			}
 			item := alfred.ResultElement{
 				Valid:    true,
 				Title:    title,
 				Subtitle: phonetic,
 				Arg:      title,
-				Mods:     mod,
+				Mods:     mod2,
 			}
 			items.Append(&item)
 		}
@@ -99,12 +105,18 @@ func main() {
 
 	if r.Translation != nil {
 		title := strings.Join(*r.Translation, "; ")
+		mod2 := copyModElementMap(mod)
+		mod2[alfred.Mods_Cmd] = &alfred.ModElement{
+			Valid:    true,
+			Arg:      title,
+			Subtitle: "发音",
+		}
 		item := alfred.ResultElement{
 			Valid:    true,
 			Title:    title,
 			Subtitle: "翻译结果",
 			Arg:      title,
-			Mods:     mod,
+			Mods:     mod2,
 		}
 		items.Append(&item)
 	}
@@ -117,6 +129,12 @@ func main() {
 		})
 
 		for _, elem := range *r.Web {
+			mod2 := copyModElementMap(mod)
+			mod2[alfred.Mods_Cmd] = &alfred.ModElement{
+				Valid:    true,
+				Arg:      elem.Key,
+				Subtitle: "发音",
+			}
 			items.Append(&alfred.ResultElement{
 				Valid:    true,
 				Title:    elem.Key,

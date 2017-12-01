@@ -6,6 +6,8 @@ import (
 	"net/url"
 	"regexp"
 	"strings"
+
+	"github.com/zgs225/alfred-youdao/alfred"
 )
 
 func toYoudaoDictUrl(q string) string {
@@ -60,4 +62,12 @@ func parseArgs(args []string) (q string, from string, to string, lang bool) {
 		q = strings.TrimSpace(strings.Join(args[1:], " "))
 	}
 	return
+}
+
+func copyModElementMap(m map[string]*alfred.ModElement) map[string]*alfred.ModElement {
+	m2 := make(map[string]*alfred.ModElement)
+	for k, v := range m {
+		m2[k] = v
+	}
+	return m2
 }

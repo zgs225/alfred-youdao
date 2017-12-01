@@ -28,7 +28,7 @@ Youdao Dict for Alfred.
 
 ## Dependencies
 
-+ Go 1.8
++ Go 1.6
 
 ## TODO
 

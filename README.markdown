@@ -10,6 +10,7 @@ Youdao Dict for Alfred.
 + 使用方法 `yd {query}`
 + 支持屏幕取词功能, 需要先在Alfred Workflow中设置热键
 + 使用`Shift+Enter`在有道词典网页中打开
++ 使用`Cmd+Enter`发音
 + 按`Enter`键复制翻译结果
 + 支持设置源语言和目标语言，支持中文、日语、英语等相互翻译。语法是`yd zh-CHS=>ja 我爱你`
 
@@ -32,11 +33,17 @@ Youdao Dict for Alfred.
 ## TODO
 
 + [x] 一个好的自动更新机制
-+ [ ] 添加语音
++ [x] 添加语音
 + [ ] 自定义有道API Key和Secret
 + [ ] 拼写提示功能
 
 ## CHANGELOG
+
+### 1.5.0
+
++ 添加发音功能，调用Mac自带的发音软件
++ 优化了打开词典的网页
++ 其他小修改
 
 ### 1.4.0
 

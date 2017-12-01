@@ -57,7 +57,13 @@ func parseArgs(args []string) (q string, from string, to string, lang bool) {
 	if v := langPattern.FindAllStringSubmatch(strings.TrimSpace(args[1]), -1); len(v) > 0 {
 		lang = true
 		from = v[0][1]
+		if from == "zh" {
+			from = "zh-CHS"
+		}
 		to = v[0][2]
+		if to == "zh" {
+			to = "zh-CHS"
+		}
 		q = strings.TrimSpace(strings.Join(args[2:], " "))
 	} else {
 		q = strings.TrimSpace(strings.Join(args[1:], " "))

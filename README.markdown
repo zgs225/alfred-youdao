@@ -16,7 +16,7 @@ Youdao Dict for Alfred.
 
 支持相互翻译的语言列表如下:
 
-+ `zh` - 中文
++ `zh`     - 中文
 + `ja`     - 日文
 + `en`     - 英文
 + `ko`     - 韩文
@@ -34,10 +34,14 @@ Youdao Dict for Alfred.
 
 + [x] 一个好的自动更新机制
 + [x] 添加语音
-+ [ ] 自定义有道API Key和Secret
++ [x] 自定义有道API Key 和 Secret
 + [ ] 拼写提示功能
 
 ## CHANGELOG
+
+### 1.5.2
+
++ 自定义有道API Key 和 Secret
 
 ### 1.5.1
 

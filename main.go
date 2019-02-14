@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	APPID     = "2f871f8481e49b4c"
-	APPSECRET = "CQFItxl9hPXuQuVcQa5F2iPmZSbN0hYS"
+	APPID     = ""
+	APPSECRET = ""
 	MAX_LEN   = 255
 
 	UPDATECMD = "alfred-youdao:update"
@@ -26,13 +26,26 @@ func init() {
 func main() {
 	log.Println(os.Args)
 
+	items := alfred.NewResult()
+
+	appID := os.Getenv("zhiyun_id")
+	appKey := os.Getenv("zhiyun_key")
+
+	if appID == "" || appKey == "" {
+		items.Append(&alfred.ResultElement{
+			Valid:    false,
+			Title:    "错误: 请设置有道API",
+			Subtitle: "有道词典",
+		})
+		items.End()
+	}
+
 	client := &youdao.Client{
-		AppID:     APPID,
-		AppSecret: APPSECRET,
+		AppID:     appID,
+		AppSecret: appKey,
 	}
 	agent := newAgent(client)
 	q, from, to, lang := parseArgs(os.Args)
-	items := alfred.NewResult()
 
 	if lang {
 		if err := agent.Client.SetFrom(from); err != nil {

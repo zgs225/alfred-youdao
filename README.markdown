@@ -5,6 +5,10 @@ Youdao Dict for Alfred.
 
 ![预览](./assets/demo.gif)
 
+设置有道API演示
+
+![预览](./assets/demo-api.gif)
+
 ## Features
 
 + 使用方法 `yd {query}`

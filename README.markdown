@@ -101,3 +101,9 @@ Youdao Dict for Alfred.
 #### 1.0.0
 
 + 完成查询和翻译功能
+
+## 感谢
+
+非常感谢以下捐赠者对本项目慷慨解囊。
+
++ [zhisheng17](https://github.com/zhisheng17)
